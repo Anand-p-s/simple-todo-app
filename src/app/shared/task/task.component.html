@@ -1,0 +1,36 @@
+<div class="card flex flex-column justify-content-center lg:align-items-center">
+    <p-card class="lg:w-6 w-auto mb-1" *ngFor="let task of tasksToDisplay">
+        
+            <span class="flex justify-content-end align-items-center">
+                <!-- <span class="lg:ml-6">
+                    <p-tag *ngIf="!task.completed" severity="info" value="Pending" />
+                    <p-tag *ngIf="task.completed" severity="success" value="completed" />
+                </span> -->
+
+                <span class="flex lg:mr-6 mr-4 mb-0" *ngIf="!task.completed && task.dueDate">
+                    <p class="text-red-600 text-xs font-semibold mb-0">Due {{ task.dueDate | date:'mediumDate' }}</p>
+                </span>
+            </span>
+
+
+            <span class="flex justify-content-between align-items-center">
+                <span class="flex font-bold white-space-nowrap lg:ml-3 ml-1" [ngClass]="{'line-through': task.completed, 'mt-3': task.completed || !task.dueDate}">
+                    <p-checkbox [binary]="true" inputId="binary" class="mr-2" (onChange)="onChange(task.id)" [(ngModel)]="task.completed" />
+                    {{ task.title }}
+                </span>
+
+                <span *ngIf="!task.completed" class="flex lg:mr-3">
+                    <p-menu #menu [model]="getMenuItems(task.id)" [popup]="true" />
+                    <p-button severity="secondary" text="true" (click)="onMenuButtonClick(menu, $event)" icon="pi pi-ellipsis-v" />
+                </span>
+            </span>
+
+            <span class="flex justify-content-between lg:align-items-center">
+                <p class="flex lg:ml-6 ml-3 mt-1 text-xs font-semibold text-grey-50">Created - {{ task.createDate | date:'mediumDate' }}</p>
+                <p *ngIf="!task.completed" class="flex lg:mr-6 mt-1 mr-3 text-xs font-semibold text-grey-500">Edited - {{ task.editedDate | date:'mediumDate' }}</p>
+            </span>
+        
+            <!-- <p-divider type="solid" /> -->
+    </p-card>
+    
+</div>

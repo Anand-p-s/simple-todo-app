@@ -1,0 +1,20 @@
+<div class="flex justify-content-center align-items-center h-screen">
+    <div class="surface-card p-4 shadow-2 border-round w-11 lg:w-5">
+        <div class="text-center mb-5">
+
+            <div class="text-900 text-3xl font-medium mb-3">Welcome Back</div>
+            <span class="text-600 font-medium line-height-3">Don't have an account?</span>
+            <a routerLink="/registration" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Create today!</a>
+        </div>
+
+        <div>
+            <label for="username" class="block text-900 font-medium mb-2">Username</label>
+            <input id="username" type="text" placeholder="Username" pInputText class="w-full mb-3" [(ngModel)]="userName">
+
+            <label for="password1" class="block text-900 font-medium mb-2">Password</label>
+            <input id="password1" type="password" placeholder="Password" pInputText class="w-full mb-3" [(ngModel)]="password">
+
+            <button pButton pRipple label="Sign In" icon="pi pi-user" class="w-full mt-5" (click)="login()"></button>
+        </div>
+    </div>
+</div>

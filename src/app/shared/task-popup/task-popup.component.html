@@ -1,0 +1,8 @@
+<p-dialog header="Today's Tasks" [modal]="true" [(visible)]="visible" [style]="{ width: '30rem' }"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
+    
+    <ul class="font-bold text-grey-700" *ngFor="let task of tasks">
+        <li [ngClass]="{'line-through': task.completed}">{{ task.title }}</li>
+    </ul>
+
+</p-dialog>

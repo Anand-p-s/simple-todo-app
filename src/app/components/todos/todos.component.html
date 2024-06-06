@@ -1,0 +1,50 @@
+<app-task-popup *ngIf="todayTasks.length > 0" [tasks]="todayTasks"></app-task-popup>
+
+<div class="flex justify-content-between">
+    <app-sidebar class="flex" (onSideBarChange)="showWhichPanel($event)"></app-sidebar>
+    <button *ngIf="!chart" pButton pRipple label="Add Task" icon="pi pi-plus" class="lg:w-2 flex"
+        (click)="showModal()"></button>
+</div>
+
+<app-task-modal [task]="task" [visible]="visible" [editMode]="editMode" [userId]="userId"
+    (close)="closeModal()"></app-task-modal>
+
+
+<app-chart [tasks]="tasks"></app-chart>
+
+
+<div class="flex justify-content-center mt-6" *ngIf="tasks.length <= 0">
+    <h2 class="mt-6">No tasks yet</h2>
+</div>
+
+<div *ngIf="!chart && tasks.length > 0">
+
+    <div class="card">
+        <p-dropdown class="flex justify-content-end mt-2" [options]="filters" [(ngModel)]="selectedFilter"
+            optionLabel="name" placeholder="Filter tasks by" />
+
+        <p-tabView>
+            <p-tabPanel class="mb-6" header="All">
+                <app-task [tasks]="pendingTasks" [selectedFilter]="selectedFilter" (onCheck)="onCheck($event)"
+                    (onDelete)="deleteTask($event)" (onEdit)="editTask($event)" (onClone)="addTask($event)"></app-task>
+
+                <p-divider type="solid" align="center"><b>Completed</b></p-divider>
+
+                <app-task [tasks]="completedTasks" [selectedFilter]="selectedFilter" (onCheck)="onCheck($event)"
+                    (onDelete)="deleteTask($event)" (onEdit)="editTask($event)" (onClone)="addTask($event)"></app-task>
+            </p-tabPanel>
+
+
+            <p-tabPanel header="Pending">
+                <app-task [tasks]="pendingTasks" [selectedFilter]="selectedFilter" (onCheck)="onCheck($event)"
+                    (onDelete)="deleteTask($event)" (onEdit)="editTask($event)" (onClone)="addTask($event)"></app-task>
+            </p-tabPanel>
+
+            <p-tabPanel header="Done">
+                <app-task [tasks]="completedTasks" [selectedFilter]="selectedFilter" (onCheck)="onCheck($event)"
+                    (onDelete)="deleteTask($event)" (onEdit)="editTask($event)" (onClone)="addTask($event)"></app-task>
+            </p-tabPanel>
+        </p-tabView>
+
+    </div>
+</div>
